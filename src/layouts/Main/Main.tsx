@@ -1,3 +1,5 @@
-export const MainLayout = () => {
-  return <div>Main Layout</div>
+import { T_MainLayoutProps } from './models'
+
+export const MainLayout = ({ children }: T_MainLayoutProps) => {
+  return <div>{children}</div>
 }
