@@ -16,7 +16,7 @@ export const Modal = styled(motion.div)`
   height: 100%;
   box-shadow: 8px 0 15px -3px rgb(0 0 0 / 10%);
 
-  & div {
+  & > div {
     z-index: 999;
   }
 `

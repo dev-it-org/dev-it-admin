@@ -5,12 +5,9 @@ export const MyInfo = () => {
 
   return (
     <div>
-      Me:
-      <div>
-        <div>email: {myInfo.email}</div>
-        <div>username: {myInfo.username}</div>
-        <div>role: {myInfo.role}</div>
-      </div>
+      <div>email: {myInfo.email}</div>
+      <div>username: {myInfo.username}</div>
+      <div>role: {myInfo.role}</div>
     </div>
   )
 }

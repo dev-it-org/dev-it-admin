@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
+import * as S from './styles'
+
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
@@ -19,8 +21,7 @@ export const Links = () => {
   }
 
   return (
-    <>
-      {isAuth && <button onClick={handleLogout}>Logout</button>}
+    <S.Links>
       <div>
         <button onClick={() => navigate(E_Routes.posts)}>Posts</button>
         {isAuth ? (
@@ -29,6 +30,7 @@ export const Links = () => {
           <button onClick={() => navigate(E_Routes.auth)}>Sign in</button>
         )}
       </div>
-    </>
+      {isAuth && <button onClick={handleLogout}>Logout</button>}
+    </S.Links>
   )
 }

@@ -1,6 +1,8 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import * as S from './styles'
+
 import { Error, Loader } from 'components'
 import { T_Post } from 'models/posts'
 import { postsAPI } from 'services'
@@ -33,18 +35,18 @@ export const Posts = () => {
 
   if (posts)
     return (
-      <div>
-        Posts
-        <div>
+      <S.Inner>
+        <S.TextField placeholder='Search posts by title' />
+        <S.PostsWrapper>
           {posts.map((post) => {
             return (
-              <div key={post.id} onClick={() => handleOpenPost(post.id)}>
+              <S.Post key={post.id} onClick={() => handleOpenPost(post.id)}>
                 {post.title}
-              </div>
+              </S.Post>
             )
           })}
-        </div>
-      </div>
+        </S.PostsWrapper>
+      </S.Inner>
     )
 
   return <Error />

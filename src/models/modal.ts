@@ -9,7 +9,7 @@ export interface I_Modal extends T_ModalBody {
 
 export enum E_Window {
   postEdit = 'postEdit',
-  // postCreate = 'postCreate',
+  postCreate = 'postCreate',
   userEdit = 'userEdit',
-  // userCreate = 'userCreate',
+  userCreate = 'userCreate',
 }

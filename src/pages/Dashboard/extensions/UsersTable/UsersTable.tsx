@@ -16,6 +16,10 @@ export const UsersTable = ({ handleOpenModal }: T_UsersTableProps) => {
     if (usersData) setUsers(usersData.data.users)
   }, [usersData])
 
+  const handleCreateUser = () => {
+    handleOpenModal(E_Window.userCreate, null)
+  }
+
   const handleDoubleClick = (data: T_User) => {
     handleOpenModal(E_Window.userEdit, data)
   }
@@ -26,6 +30,7 @@ export const UsersTable = ({ handleOpenModal }: T_UsersTableProps) => {
     return (
       <div>
         Users Table
+        <button onClick={handleCreateUser}>Create user</button>
         <div>
           {users.map((user) => {
             return (

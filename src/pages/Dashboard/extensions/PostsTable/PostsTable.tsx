@@ -25,6 +25,10 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
     if (postsData) setPosts(postsData.data.posts)
   }, [postsData])
 
+  const handleCreatePost = () => {
+    handleOpenModal(E_Window.postCreate, null)
+  }
+
   const handleDoubleClick = (data: T_Post) => {
     handleOpenModal(E_Window.postEdit, data)
   }
@@ -34,7 +38,8 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
   if (posts)
     return (
       <div>
-        Posts
+        <div>Posts</div>
+        <button onClick={handleCreatePost}>Create post</button>
         <div>
           {posts.map((post) => {
             return (
