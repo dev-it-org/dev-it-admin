@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { T_SignUpFormData, T_SignUpProps } from './models'
 import * as S from './styles'
 
-import { E_Mode } from '../models'
+import { E_AuthMode } from '../models'
 
 export const SignUp = ({ handleToggleAuthMode }: T_SignUpProps) => {
   const { register, handleSubmit } = useForm<T_SignUpFormData>({
@@ -37,7 +37,7 @@ export const SignUp = ({ handleToggleAuthMode }: T_SignUpProps) => {
         <S.Button type='submit'>Sign up</S.Button>
         <S.Box>
           <S.Typography>Already have an account?</S.Typography>
-          <S.Button onClick={() => handleToggleAuthMode(E_Mode.signIn)}>Sign in</S.Button>
+          <S.Button onClick={() => handleToggleAuthMode(E_AuthMode.signIn)}>Sign in</S.Button>
         </S.Box>
       </S.Form>
     </S.Inner>

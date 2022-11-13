@@ -8,5 +8,8 @@ export interface I_Modal extends T_ModalBody {
 }
 
 export enum E_Window {
-  start = 'start',
+  postEdit = 'postEdit',
+  // postCreate = 'postCreate',
+  userEdit = 'userEdit',
+  // userCreate = 'userCreate',
 }

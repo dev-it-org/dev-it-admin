@@ -1,6 +1,7 @@
 import * as S from './styles/app'
 import { GlobalStyles } from './styles/global'
 
+import { Modal } from 'components'
 import { AppRoutes } from 'routes'
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <S.App>
       <GlobalStyles />
       <AppRoutes />
+      <Modal />
     </S.App>
   )
 }

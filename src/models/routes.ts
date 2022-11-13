@@ -1,6 +1,6 @@
 export enum E_Routes {
   start = '',
-  home = '/home',
+  dashboard = '/dashboard',
   posts = '/posts',
   post = '/posts/:postId',
   auth = '/auth',

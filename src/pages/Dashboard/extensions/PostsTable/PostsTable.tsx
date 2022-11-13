@@ -1,14 +1,14 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+
+import { T_PostsTableProps } from './models'
 
 import { Error, Loader } from 'components'
+import { E_Window } from 'models/modal'
 import { T_Post } from 'models/posts'
 import { postsAPI } from 'services'
 
-export const Posts = () => {
+export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
   const [posts, setPosts] = useState<T_Post[]>([])
-
-  const navigate = useNavigate()
 
   const [getPosts, { data: postsData, isLoading }] = postsAPI.useLazyGetPostsQuery()
 
@@ -25,8 +25,8 @@ export const Posts = () => {
     if (postsData) setPosts(postsData.data.posts)
   }, [postsData])
 
-  const handleOpenPost = (postId: number) => {
-    navigate(`${postId}`)
+  const handleDoubleClick = (data: T_Post) => {
+    handleOpenModal(E_Window.postEdit, data)
   }
 
   if (isLoading) return <Loader />
@@ -38,7 +38,7 @@ export const Posts = () => {
         <div>
           {posts.map((post) => {
             return (
-              <div key={post.id} onClick={() => handleOpenPost(post.id)}>
+              <div key={post.id} onDoubleClick={() => handleDoubleClick(post)}>
                 {post.title}
               </div>
             )

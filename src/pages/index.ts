@@ -1,4 +1,4 @@
-export { Home } from './Home'
+export { Dashboard } from './Dashboard'
 export { Posts } from './Posts'
 export { Post } from './Post'
 export { Auth } from './Auth'

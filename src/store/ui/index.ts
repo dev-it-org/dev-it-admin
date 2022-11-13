@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { instanceMe } from './data'
 import { I_UIState } from './models'
 
 import { T_ModalBody } from 'models/modal'
+import { T_User } from 'models/users'
 
 const initialState: I_UIState = {
+  me: instanceMe,
   isAuth: false,
   modal: {
     isOpen: false,
@@ -17,8 +20,17 @@ export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    setAuth: (state, action: PayloadAction<boolean>) => {
-      state.isAuth = action.payload
+    setAuth: (
+      state,
+      action: PayloadAction<Omit<T_User, 'created_at' | 'updated_at'> & { isAuth: boolean }>,
+    ) => {
+      const { isAuth, ...spread } = action.payload
+      state.isAuth = isAuth
+      state.me = spread
+    },
+    removeAuth: (state) => {
+      state.isAuth = false
+      state.me = instanceMe
     },
     openModal: (state, action: PayloadAction<T_ModalBody>) => {
       state.modal.isOpen = true
@@ -33,4 +45,4 @@ export const uiSlice = createSlice({
   },
 })
 
-export const { openModal, closeModal, setAuth } = uiSlice.actions
+export const { openModal, closeModal, setAuth, removeAuth } = uiSlice.actions

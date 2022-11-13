@@ -5,7 +5,7 @@ import { MainRoute } from './MainRoute'
 import { ProtectedRoute } from './ProtectedRoute'
 
 import { E_Routes } from 'models/routes'
-import { Auth, Home, NotFound, Post, Posts } from 'pages'
+import { Auth, Dashboard, NotFound, Post, Posts } from 'pages'
 
 export const AppRoutes = () => {
   return (
@@ -16,7 +16,7 @@ export const AppRoutes = () => {
         <Route path={E_Routes.post} element={<Post />} />
         <Route path={E_Routes.every} element={<NotFound />} />
         <Route element={<ProtectedRoute />}>
-          <Route path={E_Routes.home} element={<Home />} />
+          <Route path={E_Routes.dashboard} element={<Dashboard />} />
         </Route>
       </Route>
       <Route element={<AuthRoute />}>
