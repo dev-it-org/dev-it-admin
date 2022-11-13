@@ -4,6 +4,5 @@ export enum E_Routes {
   posts = '/posts',
   post = '/posts/:postId',
   auth = '/auth',
-  signIn = '/auth/sign-in',
-  signUp = '/aut/sign-up',
+  every = '*',
 }

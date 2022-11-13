@@ -1,5 +1,6 @@
 import { T_AuthLayoutProps } from './models'
+import * as S from './styles'
 
 export const AuthLayout = ({ children }: T_AuthLayoutProps) => {
-  return <div>{children}</div>
+  return <S.Inner>{children}</S.Inner>
 }
