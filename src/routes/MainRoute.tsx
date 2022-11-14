@@ -11,9 +11,13 @@ import { LocalStorage } from 'utils/helpers/localStorage'
 export const MainRoute = () => {
   const dispatch = useStoreDispatch()
 
-  const { data: myInfoData, isLoading } = infoAPI.useGetMyInfoQuery()
+  const [getMyInfo, { data: myInfoData, isLoading }] = infoAPI.useLazyGetMyInfoQuery()
 
   const token = LocalStorage.getAuthToken()
+
+  useLayoutEffect(() => {
+    if (token) getMyInfo()
+  }, [token])
 
   useLayoutEffect(() => {
     if (token && myInfoData)

@@ -8,6 +8,7 @@ import * as S from './styles'
 import { E_AuthMode } from '../models'
 
 import { E_Routes } from 'models/routes'
+import { E_UserRole } from 'models/users'
 import { authAPI } from 'services'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -32,22 +33,36 @@ export const SignIn = ({ handleToggleAuthMode }: T_SignInProps) => {
   useEffect(() => {
     if (signInData) {
       LocalStorage.setAuthToken(signInData.data.accessToken)
-      navigate(E_Routes.dashboard, { replace: true })
+      if (signInData.data.role === E_UserRole.User) {
+        navigate(E_Routes.posts, { replace: true })
+      } else {
+        navigate(E_Routes.dashboard, { replace: true })
+      }
     }
   }, [signInData])
 
   return (
     <S.Inner>
       <S.Form onSubmit={handleSubmit(handleSend)}>
-        <S.TextField type='text' {...register('email', { required: true })} />
-        <S.TextField type='password' {...register('password', { required: true })} />
-        <S.Button disabled={isLoading} type='submit'>
-          Sign in
-        </S.Button>
-        <S.Box>
-          <S.Typography>Unregistered?</S.Typography>
-          <S.Button onClick={() => handleToggleAuthMode(E_AuthMode.signUp)}>Sign up</S.Button>
-        </S.Box>
+        <S.TextField placeholder='Email' {...register('email', { required: true })} />
+        <S.TextField
+          placeholder='Password'
+          type='password'
+          {...register('password', { required: true })}
+        />
+        <S.ButtonGroup>
+          <S.Button disabled={isLoading} type='submit'>
+            Sign in
+          </S.Button>
+          <S.Box>
+            <S.LinkButton
+              disabled={isLoading}
+              onClick={() => handleToggleAuthMode(E_AuthMode.signUp)}
+            >
+              Does not have an account?
+            </S.LinkButton>
+          </S.Box>
+        </S.ButtonGroup>
       </S.Form>
     </S.Inner>
   )

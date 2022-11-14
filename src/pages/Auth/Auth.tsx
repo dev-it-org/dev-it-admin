@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { SignIn, SignUp } from './extensions'
 import { E_AuthMode } from './models'
+import * as S from './styles'
 
 export const Auth = () => {
   const [authMode, setAuthMode] = useState<E_AuthMode>(E_AuthMode.signIn)
@@ -19,10 +20,5 @@ export const Auth = () => {
     }
   }
 
-  return (
-    <div>
-      Auth
-      {renderContent()}
-    </div>
-  )
+  return <S.Inner>{renderContent()}</S.Inner>
 }

@@ -9,7 +9,9 @@ export const MainLayout = ({ children }: T_MainLayoutProps) => {
         <Links />
         <MyInfo />
       </S.Header>
-      <S.Content>{children}</S.Content>
+      <S.Content>
+        <S.ContentInner>{children}</S.ContentInner>
+      </S.Content>
     </S.Inner>
   )
 }

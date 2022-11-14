@@ -1,5 +1,6 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useLayoutEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDebounce } from 'use-debounce'
 
 import * as S from './styles'
 
@@ -9,6 +10,9 @@ import { postsAPI } from 'services'
 
 export const Posts = () => {
   const [posts, setPosts] = useState<T_Post[]>([])
+  const [value, setValue] = useState<string>('')
+
+  const [newFilteredValue] = useDebounce(value, 500)
 
   const navigate = useNavigate()
 
@@ -19,13 +23,17 @@ export const Posts = () => {
       limit: '',
       page: '',
       sort: '',
-      title: '',
+      title: newFilteredValue,
     })
-  }, [])
+  }, [newFilteredValue])
 
   useEffect(() => {
     if (postsData) setPosts(postsData.data.posts)
   }, [postsData])
+
+  const handleChangeValue = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.currentTarget.value)
+  }
 
   const handleOpenPost = (postId: number) => {
     navigate(`${postId}`)
@@ -36,7 +44,11 @@ export const Posts = () => {
   if (posts)
     return (
       <S.Inner>
-        <S.TextField placeholder='Search posts by title' />
+        <S.TextField
+          placeholder='Search posts by title'
+          value={value}
+          onChange={handleChangeValue}
+        />
         <S.PostsWrapper>
           {posts.map((post) => {
             return (

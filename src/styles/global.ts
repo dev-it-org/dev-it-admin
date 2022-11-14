@@ -5,20 +5,12 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-
-    font-family: Montserrat, sans-serif;
     font-size: 16px;
-
     background-color: #fff;
   }
 
   body {
-      &.locked {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-      }
+      background-color: #000;
   }
   
   * {

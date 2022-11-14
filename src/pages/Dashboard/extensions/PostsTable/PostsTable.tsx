@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 
 import { T_PostsTableProps } from './models'
+import * as S from './styles'
 
 import { Error, Loader } from 'components'
 import { E_Window } from 'models/modal'
@@ -11,6 +12,7 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
   const [posts, setPosts] = useState<T_Post[]>([])
 
   const [getPosts, { data: postsData, isLoading }] = postsAPI.useLazyGetPostsQuery()
+  const [deletePost, { isLoading: isPostDeleting }] = postsAPI.useDeletePostMutation()
 
   useLayoutEffect(() => {
     getPosts({
@@ -29,27 +31,39 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
     handleOpenModal(E_Window.postCreate, null)
   }
 
-  const handleDoubleClick = (data: T_Post) => {
+  const handleToggle = (data: T_Post) => {
     handleOpenModal(E_Window.postEdit, data)
+  }
+
+  const handleDeletePost = (postId: number) => {
+    deletePost(String(postId))
   }
 
   if (isLoading) return <Loader />
 
   if (posts)
     return (
-      <div>
-        <div>Posts</div>
-        <button onClick={handleCreatePost}>Create post</button>
-        <div>
+      <S.Inner>
+        <S.CreateButton onClick={handleCreatePost}>Create post</S.CreateButton>
+        <S.PostsWrapper>
           {posts.map((post) => {
             return (
-              <div key={post.id} onDoubleClick={() => handleDoubleClick(post)}>
-                {post.title}
-              </div>
+              <S.Post key={post.id} onDoubleClick={() => handleToggle(post)}>
+                <S.Title>{post.title}</S.Title>
+                <S.ButtonGroup>
+                  <S.EditButton onClick={() => handleToggle(post)}>Edit</S.EditButton>
+                  <S.DeleteButton
+                    disabled={isPostDeleting}
+                    onClick={() => handleDeletePost(post.id)}
+                  >
+                    Delete
+                  </S.DeleteButton>
+                </S.ButtonGroup>
+              </S.Post>
             )
           })}
-        </div>
-      </div>
+        </S.PostsWrapper>
+      </S.Inner>
     )
 
   return <Error />

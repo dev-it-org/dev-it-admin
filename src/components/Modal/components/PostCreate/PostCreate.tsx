@@ -1,9 +1,18 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { T_PostCreateFormData } from './models'
 import * as S from './styles'
 
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { postsAPI } from 'services'
+import { closeModal } from 'store/ui'
+
 export const PostCreate = () => {
+  const dispatch = useStoreDispatch()
+
+  const [createPost, { isLoading, isSuccess }] = postsAPI.useCreatePostMutation()
+
   const { register, handleSubmit } = useForm<T_PostCreateFormData>({
     defaultValues: {
       title: '',
@@ -13,20 +22,23 @@ export const PostCreate = () => {
   })
 
   const handleSend = (data: T_PostCreateFormData) => {
-    console.log(data)
+    createPost(data)
   }
 
+  useEffect(() => {
+    if (isSuccess) dispatch(closeModal())
+  }, [isSuccess])
+
   return (
-    <div>
+    <S.Inner>
       <S.Form onSubmit={handleSubmit(handleSend)}>
-        Post Edit
-        <div>
-          <S.TextField {...register('title')} />
-          <S.TextField {...register('description')} />
-          <S.TextField {...register('link')} />
-        </div>
-        <button type='submit'>Create post</button>
+        <S.TextField placeholder='Title*' {...register('title', { required: true })} />
+        <S.TextField placeholder='Description' {...register('description')} />
+        <S.TextField placeholder='Link' {...register('link')} />
+        <S.UpdateButton disabled={isLoading} type='submit'>
+          Create post
+        </S.UpdateButton>
       </S.Form>
-    </div>
+    </S.Inner>
   )
 }

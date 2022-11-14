@@ -4,3 +4,9 @@ export type T_PostsRequest = {
   page?: string
   sort?: string
 }
+
+export type T_PostMutationRequest = {
+  title: string
+  description: string
+  link: string
+}

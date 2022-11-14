@@ -1,8 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { Error, Loader } from 'components'
+import * as S from './styles'
+
+import { Loader } from 'components'
 import { T_Post } from 'models/posts'
+import { NotFound } from 'pages/NotFound'
 import { postsAPI } from 'services'
 
 export const Post = () => {
@@ -24,15 +27,12 @@ export const Post = () => {
 
   if (post)
     return (
-      <div>
-        Post
-        <div>
-          <div>{post.title}</div>
-          <div>{post.description}</div>
-          <div>{post.link}</div>
-        </div>
-      </div>
+      <S.Inner>
+        <S.Title>{post.title}</S.Title>
+        <S.Description>{post.description}</S.Description>
+        <S.Link href={post.link}>Read more</S.Link>
+      </S.Inner>
     )
 
-  return <Error />
+  return <NotFound />
 }

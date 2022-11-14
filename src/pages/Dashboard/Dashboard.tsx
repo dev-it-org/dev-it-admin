@@ -32,11 +32,20 @@ export const Dashboard = () => {
 
   return (
     <S.Dashboard>
-      Dashboard
-      <div>
-        <button onClick={() => handleSetDashboardMode(E_DashboardMode.users)}>Users</button>
-        <button onClick={() => handleSetDashboardMode(E_DashboardMode.posts)}>Posts</button>
-      </div>
+      <S.ButtonGroup>
+        <S.Button
+          $mode={dashboardMode === E_DashboardMode.users}
+          onClick={() => handleSetDashboardMode(E_DashboardMode.users)}
+        >
+          Users
+        </S.Button>
+        <S.Button
+          $mode={dashboardMode === E_DashboardMode.posts}
+          onClick={() => handleSetDashboardMode(E_DashboardMode.posts)}
+        >
+          Posts
+        </S.Button>
+      </S.ButtonGroup>
       {renderContent()}
     </S.Dashboard>
   )

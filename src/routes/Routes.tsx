@@ -4,10 +4,12 @@ import { AuthRoute } from './AuthRoute'
 import { MainRoute } from './MainRoute'
 import { ProtectedRoute } from './ProtectedRoute'
 
+import { useScrollToTop } from 'hooks/useScrollToTop'
 import { E_Routes } from 'models/routes'
 import { Auth, Dashboard, NotFound, Post, Posts } from 'pages'
 
 export const AppRoutes = () => {
+  useScrollToTop()
   return (
     <Routes>
       <Route element={<MainRoute />}>

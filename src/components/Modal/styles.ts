@@ -7,7 +7,7 @@ export const Modal = styled(motion.div)`
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 998;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@ export const Modal = styled(motion.div)`
   box-shadow: 8px 0 15px -3px rgb(0 0 0 / 10%);
 
   & > div {
-    z-index: 999;
+    z-index: 10001;
   }
 `
 

@@ -1,3 +1,5 @@
+import * as S from './styles'
+
 export const NotFound = () => {
-  return <div>Not found page</div>
+  return <S.Inner>Not found page</S.Inner>
 }

@@ -8,18 +8,19 @@ export const Inner = styled.div`
   justify-content: center;
 
   width: 100%;
-  max-width: 675px;
   margin: 0 auto;
 `
 
 export const TextField = styled.input`
   width: 100%;
-  padding: 9px 24px;
+  padding: 12px 18px;
 
   font-size: 15px;
+  color: #777;
 
+  background-color: transparent;
   border: 0;
-  box-shadow: 0 0 2px 0 #999;
+  box-shadow: 0 0 1px 1px #2d3844;
 `
 
 export const Label = styled.div`
@@ -34,8 +35,8 @@ export const Label = styled.div`
 export const PostsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
   align-items: center;
+  width: 100%;
 `
 
 export const Post = styled.div`
@@ -45,6 +46,7 @@ export const Post = styled.div`
   align-items: center;
 
   width: 100%;
+  min-height: 55px;
   padding: 12px 18px;
 
   font-size: 15px;

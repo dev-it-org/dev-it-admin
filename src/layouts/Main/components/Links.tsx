@@ -5,12 +5,16 @@ import * as S from './styles'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
+import { E_UserRole } from 'models/users'
 import { removeAuth } from 'store/ui'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 export const Links = () => {
   const dispatch = useStoreDispatch()
-  const isAuth = useStoreSelector((state) => state.ui.isAuth)
+  const { isAuth, myInfo } = useStoreSelector((state) => ({
+    isAuth: state.ui.isAuth,
+    myInfo: state.ui.me,
+  }))
 
   const navigate = useNavigate()
 
@@ -22,15 +26,13 @@ export const Links = () => {
 
   return (
     <S.Links>
-      <div>
-        <button onClick={() => navigate(E_Routes.posts)}>Posts</button>
-        {isAuth ? (
-          <button onClick={() => navigate(E_Routes.dashboard)}>Dashboard</button>
-        ) : (
-          <button onClick={() => navigate(E_Routes.auth)}>Sign in</button>
-        )}
-      </div>
-      {isAuth && <button onClick={handleLogout}>Logout</button>}
+      <S.ButtonLink onClick={() => navigate(E_Routes.posts)}>Posts</S.ButtonLink>
+      {isAuth && myInfo.role !== E_UserRole.User ? (
+        <S.ButtonLink onClick={() => navigate(E_Routes.dashboard)}>Dashboard</S.ButtonLink>
+      ) : isAuth ? null : (
+        <S.ButtonLink onClick={() => navigate(E_Routes.auth)}>Sign in</S.ButtonLink>
+      )}
+      {isAuth && <S.ButtonLink onClick={handleLogout}>Logout</S.ButtonLink>}
     </S.Links>
   )
 }
