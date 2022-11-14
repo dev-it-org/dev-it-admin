@@ -1,7 +1,7 @@
-import { E_Mode } from 'pages/Auth/models'
+import { E_AuthMode } from 'pages/Auth/models'
 
 export type T_SignUpProps = {
-  handleToggleAuthMode: (mode: E_Mode) => void
+  handleToggleAuthMode: (mode: E_AuthMode) => void
 }
 
 export type T_SignUpFormData = {
