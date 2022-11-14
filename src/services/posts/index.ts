@@ -13,7 +13,10 @@ export const postsAPI = createApi({
   baseQuery,
   tagTypes: ['Posts'],
   endpoints: (build) => ({
-    getPosts: build.query<I_GetData<{ posts: T_Post[] }>, T_PostsRequest>({
+    getPosts: build.query<
+      I_GetData<{ posts: T_Post[]; count: number; total: number; page: number; limit: number }>,
+      T_PostsRequest
+    >({
       query: (params) => ({
         url: `/posts${toQueryParam(params)}`,
       }),

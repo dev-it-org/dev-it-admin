@@ -6,3 +6,8 @@ export type T_Post = {
   description: string
   link: string
 }
+
+export enum E_OrderBy {
+  asc = 'asc',
+  desc = 'desc',
+}

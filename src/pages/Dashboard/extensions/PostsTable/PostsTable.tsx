@@ -9,7 +9,13 @@ import { T_Post } from 'models/posts'
 import { postsAPI } from 'services'
 
 export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
-  const [posts, setPosts] = useState<T_Post[]>([])
+  const [postsInstance, setPostsInstance] = useState<{
+    posts: T_Post[]
+    count: number
+    total: number
+    page: number
+    limit: number
+  }>()
 
   const [getPosts, { data: postsData, isLoading }] = postsAPI.useLazyGetPostsQuery()
   const [deletePost, { isLoading: isPostDeleting }] = postsAPI.useDeletePostMutation()
@@ -24,7 +30,7 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
   }, [])
 
   useEffect(() => {
-    if (postsData) setPosts(postsData.data.posts)
+    if (postsData) setPostsInstance(postsData.data)
   }, [postsData])
 
   const handleCreatePost = () => {
@@ -41,12 +47,12 @@ export const PostsTable = ({ handleOpenModal }: T_PostsTableProps) => {
 
   if (isLoading) return <Loader />
 
-  if (posts)
+  if (postsInstance)
     return (
       <S.Inner>
         <S.CreateButton onClick={handleCreatePost}>Create post</S.CreateButton>
         <S.PostsWrapper>
-          {posts.map((post) => {
+          {postsInstance.posts.map((post) => {
             return (
               <S.Post key={post.id} onDoubleClick={() => handleToggle(post)}>
                 <S.Title>{post.title}</S.Title>
